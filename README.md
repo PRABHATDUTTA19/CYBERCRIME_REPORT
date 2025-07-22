@@ -57,7 +57,7 @@ The following SQL queries were instrumental in exploring, transforming, and extr
 ```sql
 SELECT
 	   COUNT(activity_id) AS total_activities -- Corrected to count activity_id for total rows
-      FROM cyber_activities;
+      FROM cyberreport;
 ```
 ### 2. Number of Unique Users and IP Addresses:
 ```sql
