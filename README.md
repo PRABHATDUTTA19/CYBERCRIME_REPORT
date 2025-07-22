@@ -56,7 +56,7 @@ The following SQL queries were instrumental in exploring, transforming, and extr
 ### 1. Total Number of Activities:
 ```sql
 SELECT
-	   COUNT(activity_id) AS total_activities -- Corrected to count activity_id for total rows
+      COUNT(activity_id) AS total_activities 
       FROM cyberreport;
 ```
 ### 2. Number of Unique Users and IP Addresses:
@@ -69,8 +69,8 @@ FROM cyberreport;
 ### 3. Distribution of Activity Types:
 ```sql
 SELECT
-		activity_type,
-   	COUNT(activity_id) AS Activity_Count
+      activity_type,
+      COUNT(activity_id) AS Activity_Count
 FROM cyberreport
 GROUP BY activity_type
 ORDER BY Activity_Count DESC;
@@ -78,9 +78,9 @@ ORDER BY Activity_Count DESC;
 ### 4. Distribution of Labels (Normal vs. Suspicious):
 ```sql
 SELECT
-		label,
-    	COUNT(activity_id) AS Label_Count,
-   	(COUNT(activity_id) * 100.0 / (SELECT COUNT(*) FROM cyberreport)) AS Percentage
+      label,
+      COUNT(activity_id) AS Label_Count,
+      (COUNT(activity_id) * 100.0 / (SELECT COUNT(*) FROM cyberreport)) AS Percentage
 FROM cyberreport
 GROUP BY label
 ORDER BY Label_Count DESC;
@@ -88,8 +88,8 @@ ORDER BY Label_Count DESC;
 ### 5. First and Last Activity Timestamp:
 ```sql
 SELECT
-		MAX(timestamp) AS LAST_ACTIVITY,
-		MIN (timestamp) AS FIRST_ACTIVITY
+      MAX(timestamp) AS LAST_ACTIVITY,
+      MIN (timestamp) AS FIRST_ACTIVITY
 FROM cyberreport;
 ```
 ### II. Suspicious Activity Analysis
@@ -97,7 +97,7 @@ FROM cyberreport;
 ### 6. Total Number of Suspicious Activities:
 ```sql
 SELECT
-		COUNT(activity_type) AS suspicious_activities
+      COUNT(activity_type) AS suspicious_activities
 FROM cyberreport
 WHERE label LIKE 'Suspicious';
 ```
@@ -105,9 +105,9 @@ WHERE label LIKE 'Suspicious';
 ### 7. Breakdown of Anomaly Types (Excluding 'None'):
 ```sql
 SELECT
-		anomaly_type,
-		COUNT(activity_id) AS Anomaly_Count,
-		(COUNT(activity_id) * 100.0 / (SELECT COUNT(*) FROM cyberreport WHERE anomaly_type != 'None')) AS Percentage
+      anomaly_type,
+      COUNT(activity_id) AS Anomaly_Count,
+      (COUNT(activity_id) * 100.0 / (SELECT COUNT(*) FROM cyberreport WHERE anomaly_type != 'None')) AS Percentage
 FROM cyberreport
 WHERE anomaly_type != 'None'
 GROUP BY anomaly_type
@@ -116,8 +116,8 @@ ORDER BY Anomaly_Count DESC;
 ### 8.Suspicious Activities by Activity Type:
 ```sql
 SELECT
-		activity_type,
-		COUNT(activity_id) AS Suspicious_Activity_Count
+      activity_type,
+      COUNT(activity_id) AS Suspicious_Activity_Count
 FROM cyberreport
 WHERE label = 'Suspicious'
 GROUP BY activity_type
@@ -126,8 +126,8 @@ ORDER BY Suspicious_Activity_Count DESC;
 ### 9.	Suspicious Actions by Outcome:
 ```sql
 SELECT
-		action,
-		COUNT(activity_id) AS Suspicious_Action_Count
+      action,
+      COUNT(activity_id) AS Suspicious_Action_Count
 FROM cyberreport
 WHERE label = 'Suspicious'
 GROUP BY action
@@ -136,9 +136,9 @@ ORDER BY Suspicious_Action_Count DESC;
 ### 10.	Combined View: Activity Type, Anomaly Type, and Label Count:
 ```sql
 SELECT
-	   activity_type,
-		anomaly_type,
-	   label,
+      activity_type,
+      anomaly_type,
+      label,
 COUNT(activity_id) AS Event_Count
 FROM cyberreport
 GROUP BY activity_type, anomaly_type, label
